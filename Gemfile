@@ -47,3 +47,5 @@ gem 'simple-rss'
 group :development, :test do
   gem 'rspec-rails'
 end
+
+gem 'backbone-on-rails'

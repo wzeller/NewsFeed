@@ -9,10 +9,15 @@ class FeedsController < ApplicationController
   def create
     feed = Feed.find_or_create_by_url(feed_params[:url])
     if feed
-      render :json => feed
+      render :json => feed, include: :entries
     else
       render :json => { error: "invalid url" }, status: :unprocessable_entity
     end
+  end
+
+  def show
+    feed = Feed.find(params[:id])
+    render :json => feed, include: :entries
   end
 
   private
