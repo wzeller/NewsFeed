@@ -20,8 +20,16 @@ NewReader.Views.FeedShow = Backbone.View.extend({
   initialize: function () {
     this.render();
     this.listenTo(this.model, "sync", this.render);
+    this.listenTo(this.model.entries(), "sync", this.render);
     this.model.fetch();
     NewReader.Collections.feeds.add(this.model);
   },
 
+  events: {
+    "click .refresh": "handleRefresh"
+  },
+
+  handleRefresh: function () {
+    this.model.entries().fetch();
+  }
 })
